@@ -9,7 +9,7 @@ class RateChannel < ApplicationCable::Channel
     logger.info 'клиент отписан'
   end
 
-  def send_rate(*_args)
+  def send_rate
     ActionCable.server.broadcast('rate_channel', Rate.value_for_broadcast)
   end
 end

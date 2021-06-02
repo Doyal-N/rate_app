@@ -1,31 +1,25 @@
 <script>
-  async function getStartRate() {
-    const res = await fetch(`https://www.cbr-xml-daily.ru/daily_json.js`);
-    const rates = await res.json();
-    const rateUsd = rates["Valute"]["USD"]["Value"];
+  import { createConsumer } from "@rails/actioncable";
 
-    if (res.ok) {
-      return rateUsd;
-    } else {
-      throw new Error(rateUsd);
-    }
-  }
+  const consumer = createConsumer();
 
-  // let promise = getStartRate();
+  consumer.subscriptions.create("RateChannel", {
+    connected() {},
+
+    received(data) {
+      let block = document.getElementById("rate");
+      if (block) {
+        block.textContent = data;
+      }
+    },
+  });
 </script>
 
-<!-- {#await promise then value} -->
 <div class="window">
   <h1>Current rate USD/RUB</h1>
   <div id="rate" />
 </div>
-<!-- {:catch error} -->
-<!-- <div class="window">
-  <h1>Current rate USD/RUB</h1>
-  <div id="rate">Попробуйте еще раз или вернитесь позднее!</div>
-</div> -->
 
-<!-- {/await} -->
 <style>
   h1 {
     font-size: 2rem;

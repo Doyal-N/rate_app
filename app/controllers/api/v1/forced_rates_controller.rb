@@ -13,12 +13,10 @@ class Api::V1::ForcedRatesController < Api::V1::BaseController
     forced_rate = ForcedRate.new(forced_rate_params)
 
     if forced_rate.save
-      Rufus::Scheduler.singleton.pause
-      Rufus::Scheduler.singleton.at forced_rate.show_until.to_datetime do
-        Rufus::Scheduler.singleton.resume
-      end
+      render_success(forced_rate)
+      broadcast_rate(forced_rate.rate) if forced_rate.show_until > Time.current
     else
-      render_errors(errors: forced_rate.errors.full_messages, status: 422 )
+      render_errors(errors: forced_rate.errors.full_messages, status: 422)
     end
   end
 

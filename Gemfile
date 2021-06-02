@@ -13,6 +13,7 @@ gem 'resque'
 gem 'httparty'
 gem 'rufus-scheduler'
 gem 'resque-scheduler'
+gem 'after_commit_everywhere'
 
 group :development, :test do
   gem 'byebug'

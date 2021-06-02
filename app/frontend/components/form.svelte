@@ -38,8 +38,7 @@
     return date.toLocaleDateString();
   };
 
-  async function createForcedRate(event) {
-    event.preventDefault();
+  async function createForcedRate() {
     await fetch("/api/v1/forced_rates", {
       method: "POST",
       headers: {
@@ -47,17 +46,16 @@
         "X-CSRF-TOKEN": document.querySelector('[name="csrf-token"]').content,
       },
       body: JSON.stringify({
-        rate: document.querySelector("#userRate").value,
-        show_until: document.querySelector("#userDate").value,
+        rate: document.getElementById("userRate").value,
+        show_until: document.getElementById("userDate").value,
       }),
     });
-
     getLastRate();
   }
 </script>
 
 {#await promise then rate}
-  <form on:submit={createForcedRate}>
+  <form on:submit|preventDefault={createForcedRate}>
     <div class="form-group">
       <input
         id="userRate"
@@ -91,9 +89,17 @@
     <input class="button" type="submit" />
   </form>
 {:catch error}
-  <form on:submit={createForcedRate}>
+  <form on:submit|preventDefault={createForcedRate}>
     <div class="form-group">
-      <input type="text" name="rate" value="" class="form-input" />
+      <input
+        id="userRate"
+        type="text"
+        name="rate"
+        value=""
+        use:imask={optionsInput}
+        on:accept={accept}
+        class="form-input"
+      />
       <label for="rate" class="form-label">Forced rate</label>
     </div>
 
@@ -101,6 +107,7 @@
       <Flatpickr {options} bind:value bind:formattedValue element="#picker">
         <div class="flatpickr" id="picker">
           <input
+            id="userDate"
             name="show_until"
             class="form-input"
             type="text"
@@ -113,7 +120,7 @@
       <label for="show_until" class="form-label">Show datetime</label>
     </div>
 
-    <input class="button" type="submit" on:submit={createForcedRate} />
+    <input class="button" type="submit" />
   </form>
 {/await}
 

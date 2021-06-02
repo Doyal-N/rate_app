@@ -6,4 +6,8 @@ class Api::V1::BaseController < ApplicationController
   def render_errors(errors:, status:)
     render json: { data: [], errors: errors }, status: status
   end
+
+  def broadcast_rate(value)
+    ActionCable.server.broadcast('rate_channel', value)
+  end
 end
