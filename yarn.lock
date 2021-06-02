@@ -863,6 +863,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@popperjs/core@^2.6.0":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+
 "@rails/actioncable@^6.0.0":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.3.tgz#c8a67ec4d22ecd6931f7ebd98143fddbc815419a"
@@ -7015,10 +7020,17 @@ svelte2tsx@^0.1.157:
     dedent-js "^1.0.1"
     pascal-case "^3.1.1"
 
-svelte@^3.37.0:
-  version "3.37.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.37.0.tgz#dc7cd24bcc275cdb3f8c684ada89e50489144ccd"
-  integrity sha512-TRF30F4W4+d+Jr2KzUUL1j8Mrpns/WM/WacxYlo5MMb2E5Qy2Pk1Guj6GylxsW9OnKQl1tnF8q3hG/hQ3h6VUA==
+svelte@^3.38.2:
+  version "3.38.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.38.2.tgz#55e5c681f793ae349b5cc2fe58e5782af4275ef5"
+  integrity sha512-q5Dq0/QHh4BLJyEVWGe7Cej5NWs040LWjMbicBGZ+3qpFWJ1YObRmUDZKbbovddLC9WW7THTj3kYbTOFmU9fbg==
+
+sveltestrap@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-5.1.0.tgz#27e23eebf81d8552a37d0e28d851a7dc31a6f8ea"
+  integrity sha512-TQR/dj4+BgAYqKM5e547ln5ebNcc4e19Ee4VhPk5T7lYlcJHK+HDj/M+rmM+pv5Zqc5p7kdN8yIPNTdOSPc5uA==
+  dependencies:
+    "@popperjs/core" "^2.6.0"
 
 svgo@^1.0.0:
   version "1.3.2"
