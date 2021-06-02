@@ -55,7 +55,10 @@
 </script>
 
 {#await promise then rate}
-  <form on:submit|preventDefault={createForcedRate}>
+  <form
+    class="shadow-lg p-3 mb-5 bg-body rounded"
+    on:submit|preventDefault={createForcedRate}
+  >
     <div class="form-group">
       <input
         id="userRate"
@@ -86,10 +89,13 @@
       <label for="show_until" class="form-label">Show datetime</label>
     </div>
 
-    <input class="button" type="submit" />
+    <button class="btn btn-primary" type="submit">Change rate</button>
   </form>
 {:catch error}
-  <form on:submit|preventDefault={createForcedRate}>
+  <form
+    class="shadow-lg p-3 mb-5 bg-body rounded"
+    on:submit|preventDefault={createForcedRate}
+  >
     <div class="form-group">
       <input
         id="userRate"
@@ -120,7 +126,7 @@
       <label for="show_until" class="form-label">Show datetime</label>
     </div>
 
-    <input class="button" type="submit" />
+    <button class="btn btn-success" type="submit">Change rate</button>
   </form>
 {/await}
 
@@ -132,20 +138,6 @@
     box-shadow: 0 4px 16px #ccc;
     font-family: Georgia, "Times New Roman", Times, serif;
     letter-spacing: 1px;
-  }
-
-  .button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-family: sans-serif;
-    letter-spacing: 1px;
-    font-size: 16xp;
-    color: #fff;
-    background-color: #0071f0;
-    outline: none;
-    cursor: pointer;
-    transition: 0.3s;
   }
 
   .form-group {
@@ -170,11 +162,6 @@
 
   input {
     font-size: 1.3rem;
-  }
-
-  .button:focus,
-  .button:hover {
-    background-color: rgba(0, 113, 240, 0.7);
   }
 
   input:focus {

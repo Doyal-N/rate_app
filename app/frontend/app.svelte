@@ -7,9 +7,11 @@
 </script>
 
 <Router {url}>
-  <nav class="navbar">
-    <a href="/" class="link" use:link>Home</a> |
-    <a href="admin" class="link" use:link>Change rate</a>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a href="/" class="link text-dark" use:link>Home</a>
+      <a href="admin" class="link text-dark" use:link>Change rate</a>
+    </div>
   </nav>
   <div class="container">
     <Route path="/admin" component={Form} />

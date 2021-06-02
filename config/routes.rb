@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   end
 
   root 'home#index'
+
   match '*path', to: 'home#index', via: :get
 end
