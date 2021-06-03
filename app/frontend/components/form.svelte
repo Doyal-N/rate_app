@@ -2,8 +2,18 @@
   import Flatpickr from "svelte-flatpickr";
   import "flatpickr/dist/themes/light.css";
   import { imask } from "@imask/svelte";
+  import Notification from "./notification";
 
   let value, formattedValue;
+
+  function showNotify(response) {
+    if (response["status"] === 200) {
+      let notify = document.getElementById("notify");
+      notify.classList.remove("d-none");
+      document.getElementById("text").textContent =
+        "Forced rate succesfully created!";
+    }
+  }
 
   const options = {
     enableTime: true,
@@ -39,7 +49,7 @@
   };
 
   async function createForcedRate() {
-    await fetch("/api/v1/forced_rates", {
+    const response = await fetch("/api/v1/forced_rates", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,84 +61,91 @@
       }),
     });
     getLastRate();
+    showNotify(response);
   }
 </script>
 
-{#await promise then rate}
-  <form
-    class="shadow-lg p-3 mb-5 bg-body rounded"
-    on:submit|preventDefault={createForcedRate}
-  >
-    <div class="form-group">
-      <input
-        id="userRate"
-        type="text"
-        name="rate"
-        value={rate["rate"]}
-        class="form-input"
-        use:imask={optionsInput}
-        on:accept={accept}
-      />
-      <label for="rate" class="form-label">Forced rate</label>
-    </div>
-
-    <div class="form-group">
-      <Flatpickr {options} bind:value bind:formattedValue element="#picker">
-        <div class="flatpickr" id="picker">
+<div class="row">
+  <div class="col">
+    {#await promise then rate}
+      <Notification />
+      <form
+        class="shadow-lg p-3 mb-5 bg-body rounded"
+        on:submit|preventDefault={createForcedRate}
+      >
+        <div class="form-group">
           <input
-            id="userDate"
-            name="show_until"
-            class="form-input"
+            id="userRate"
             type="text"
-            value={formatDate(rate["show_until"])}
-            placeholder={formatDate(rate["show_until"])}
-            data-input
+            name="rate"
+            value={rate["rate"]}
+            class="form-input"
+            use:imask={optionsInput}
+            on:accept={accept}
           />
+          <label for="rate" class="form-label">Forced rate</label>
         </div>
-      </Flatpickr>
-      <label for="show_until" class="form-label">Show datetime</label>
-    </div>
 
-    <button class="btn btn-primary" type="submit">Change rate</button>
-  </form>
-{:catch error}
-  <form
-    class="shadow-lg p-3 mb-5 bg-body rounded"
-    on:submit|preventDefault={createForcedRate}
-  >
-    <div class="form-group">
-      <input
-        id="userRate"
-        type="text"
-        name="rate"
-        value=""
-        use:imask={optionsInput}
-        on:accept={accept}
-        class="form-input"
-      />
-      <label for="rate" class="form-label">Forced rate</label>
-    </div>
+        <div class="form-group">
+          <Flatpickr {options} bind:value bind:formattedValue element="#picker">
+            <div class="flatpickr" id="picker">
+              <input
+                id="userDate"
+                name="show_until"
+                class="form-input"
+                type="text"
+                value={formatDate(rate["show_until"])}
+                placeholder={formatDate(rate["show_until"])}
+                data-input
+              />
+            </div>
+          </Flatpickr>
+          <label for="show_until" class="form-label">Show datetime</label>
+        </div>
 
-    <div class="form-group">
-      <Flatpickr {options} bind:value bind:formattedValue element="#picker">
-        <div class="flatpickr" id="picker">
+        <button class="btn btn-success" type="submit">Change rate</button>
+      </form>
+    {:catch error}
+      <Notification />
+      <form
+        class="shadow-lg p-3 mb-5 bg-body rounded"
+        on:submit|preventDefault={createForcedRate}
+      >
+        <div class="form-group">
           <input
-            id="userDate"
-            name="show_until"
-            class="form-input"
+            id="userRate"
             type="text"
+            name="rate"
             value=""
-            placeholder=""
-            data-input
+            use:imask={optionsInput}
+            on:accept={accept}
+            class="form-input"
           />
+          <label for="rate" class="form-label">Forced rate</label>
         </div>
-      </Flatpickr>
-      <label for="show_until" class="form-label">Show datetime</label>
-    </div>
 
-    <button class="btn btn-success" type="submit">Change rate</button>
-  </form>
-{/await}
+        <div class="form-group">
+          <Flatpickr {options} bind:value bind:formattedValue element="#picker">
+            <div class="flatpickr" id="picker">
+              <input
+                id="userDate"
+                name="show_until"
+                class="form-input"
+                type="text"
+                value=""
+                placeholder=""
+                data-input
+              />
+            </div>
+          </Flatpickr>
+          <label for="show_until" class="form-label">Show datetime</label>
+        </div>
+
+        <button class="btn btn-success" type="submit">Change rate</button>
+      </form>
+    {/await}
+  </div>
+</div>
 
 <style>
   form {

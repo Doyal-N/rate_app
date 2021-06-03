@@ -10,6 +10,7 @@
       let block = document.getElementById("rate");
       if (block) {
         block.textContent = data;
+        block.dataset.value = data;
       }
     },
   });
