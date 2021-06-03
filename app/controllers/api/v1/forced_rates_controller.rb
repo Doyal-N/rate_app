@@ -18,7 +18,7 @@ class Api::V1::ForcedRatesController < Api::V1::BaseController
       if forced_rate.show_until > Time.current
         broadcast_rate(forced_rate.rate)
 
-        # ResumeJob.perform_later(forced_rate.show_until)
+        ResumeJob.perform_later(forced_rate.show_until)
       end
     else
       render_errors(errors: forced_rate.errors.full_messages, status: 422)

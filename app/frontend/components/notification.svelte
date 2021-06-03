@@ -1,6 +1,4 @@
 <script>
-  export let notifyClass = "alert alert-primary";
-
   const close = function () {
     let btnClose = document.querySelector(".btn-close"),
       notify = document.getElementById("notify");
@@ -11,8 +9,13 @@
   };
 </script>
 
-<div id="notify" class="{notifyClass} d-none">
-  <button type="button" on:click={close} class="btn-close" aria-label="Close" />
+<div id="notify" class="d-flex alert alert-primary d-none">
+  <button
+    type="button"
+    on:click={close}
+    class="mr-4 btn-close"
+    aria-label="Close"
+  />
   <span id="text" role="alert" />
 </div>
 

@@ -4,14 +4,27 @@
   import { imask } from "@imask/svelte";
   import Notification from "./notification";
 
-  let value, formattedValue;
+  let value,
+    formattedValue,
+    errorsText = "";
 
-  function showNotify(response) {
+  async function showNotify(response) {
     if (response["status"] === 200) {
       let notify = document.getElementById("notify");
       notify.classList.remove("d-none");
       document.getElementById("text").textContent =
         "Forced rate succesfully created!";
+    } else {
+      let data = await response.json(),
+        errors = data["errors"];
+
+      notify.classList.remove("alert-primary", "d-none");
+      notify.classList.add("alert-danger");
+
+      errors.forEach((element) => {
+        errorsText += element + "</br>";
+      });
+      document.getElementById("text").innerHTML = errorsText;
     }
   }
 
