@@ -57,8 +57,12 @@
 
   const formatDate = function (str) {
     let date = new Date(str);
+    let time = date.toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
-    return date.toLocaleDateString();
+    return `${date.toLocaleDateString()} ${time}`;
   };
 
   async function createForcedRate() {
