@@ -13,12 +13,24 @@ gem 'resque'
 gem 'httparty'
 gem 'rufus-scheduler'
 gem 'after_commit_everywhere'
+gem 'tzinfo-data'
 # gem 'foreman', require: false
 
 group :development, :test do
   gem 'byebug'
 end
 
+group :test do
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
+
 group :development do
-  gem 'web-console', '>= 4.1.0'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end

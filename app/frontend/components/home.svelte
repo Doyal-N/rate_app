@@ -1,16 +1,26 @@
 <script>
   import { createConsumer } from "@rails/actioncable";
 
+  function changeCurrentRate(value) {
+    document.getElementById("rate").textContent = value;
+  }
+
+  async function showRate() {
+    const res = await fetch("api/v1/current_rate");
+    const dataToJson = await res.json();
+    changeCurrentRate(dataToJson["data"]);
+  }
+
   const consumer = createConsumer();
 
   consumer.subscriptions.create("RateChannel", {
-    connected() {},
+    connected() {
+      showRate();
+    },
 
     received(data) {
-      let block = document.getElementById("rate");
-      if (block) {
-        block.textContent = data;
-        block.dataset.value = data;
+      if (document.getElementById("rate")) {
+        changeCurrentRate(data);
       }
     },
   });

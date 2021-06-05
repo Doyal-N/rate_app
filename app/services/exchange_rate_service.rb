@@ -25,7 +25,7 @@ class ExchangeRateService
     end
 
     def broadcast_rate
-      ActionCable.server.broadcast('rate_channel', Rate.value_for_broadcast)
+      ActionCable.server.broadcast('rate_channel', GetCurrentRate.value_for_broadcast)
     end
   end
 end

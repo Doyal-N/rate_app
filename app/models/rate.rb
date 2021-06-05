@@ -1,13 +1,5 @@
 class Rate < ApplicationRecord
-  validates :value, presence: true, numericality: { greater_than: 0 }
+  CURRENT_FORMAT = /\A\d{2}(.\d{0,3})?\z/.freeze
 
-  def self.value_for_broadcast
-    forced_rate = ForcedRate.last
-
-    if forced_rate.present? && forced_rate.show_until > Time.current
-      forced_rate.rate
-    else
-      last&.value
-    end
-  end
+  validates :value, presence: true, numericality: true, format: { with: CURRENT_FORMAT  }
 end
