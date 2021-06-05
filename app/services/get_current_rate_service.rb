@@ -1,4 +1,6 @@
-module GetCurrentRate
+# frozen_string_literal: true
+
+module GetCurrentRateService
   def self.value_for_broadcast
     forced_rate = ForcedRate.last
 

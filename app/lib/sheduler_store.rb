@@ -1,14 +1,11 @@
+# frozen_string_literal: true
+
 class SchedulerStore
+  def self.sheduler
+    @@job
+  end
 
-  @@job = nil
-
-  class << self
-    def get_job
-      @@job
-    end
-
-    def set_job(value)
-      @@job = value
-    end
+  def self.app_sheduler(value)
+    @@job = value
   end
 end

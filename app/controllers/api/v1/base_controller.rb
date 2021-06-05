@@ -1,13 +1,19 @@
-class Api::V1::BaseController < ApplicationController
-  def render_success(data)
-    render json: { data: data, errors: [] }, status: 200
-  end
+# frozen_string_literal: true
 
-  def render_errors(errors:, status:)
-    render json: { data: [], errors: errors }, status: status
-  end
+module Api
+  module V1
+    class BaseController < ApplicationController
+      def render_success(data)
+        render json: { data: data, errors: [] }, status: :ok
+      end
 
-  def broadcast_rate(value)
-    ActionCable.server.broadcast('rate_channel', value)
+      def render_errors(errors:, status:)
+        render json: { data: [], errors: errors }, status: status
+      end
+
+      def broadcast_rate(value)
+        ActionCable.server.broadcast('rate_channel', value)
+      end
+    end
   end
 end

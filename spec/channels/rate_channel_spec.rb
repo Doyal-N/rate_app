@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RateChannel, type: :channel do
@@ -5,7 +7,7 @@ RSpec.describe RateChannel, type: :channel do
     stub_connection
   end
 
-  it "subscribes to a stream" do
+  it 'subscribes to a stream' do
     subscribe
 
     expect(subscription).to be_confirmed

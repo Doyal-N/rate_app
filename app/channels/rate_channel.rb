@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RateChannel < ApplicationCable::Channel
   def subscribed
     logger.info 'клиент подписан'
