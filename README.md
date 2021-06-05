@@ -1,24 +1,14 @@
-# README
+# Rate App
+  Приложение по отображению актуального курса USD/RUB в зависимости от внутренней логики форсированного курса. Ознакомительная версия состоит из двух основных комнонентов - представление курса и изменение курса.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+  ![главный экран](screenshots/screen.jpg)
 
-Things you may want to cover:
+  Фронтенд Rails приложения реализован на фреймворке `Svelte`.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### ToDo:
++ Добавить разделение ролей (оградить доступ к изменению курса всем)
++ Добавить больше валютных или криптовалютных пар
++ Добавить визуальные графики изменения цены под каждым, либо отдельной страницей
++ Воможность добавлять пары в избранное
++ Личный кабинет
++ Возможность менять частоту получения актуального курса
