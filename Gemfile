@@ -14,7 +14,6 @@ gem 'httparty'
 gem 'rufus-scheduler'
 gem 'after_commit_everywhere'
 gem 'tzinfo-data'
-# gem 'foreman', require: false
 
 group :development, :test do
   gem 'byebug'
@@ -26,11 +25,11 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'capybara'
-  gem 'launchy'
   gem 'selenium-webdriver'
 end
 
 group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'foreman', require: false
 end
