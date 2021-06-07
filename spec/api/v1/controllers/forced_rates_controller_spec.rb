@@ -50,7 +50,7 @@ describe Api::V1::ForcedRatesController, type: :request do
         expect(json_data['data']['show_until']).to eq('2030-03-15T17:00:00.000+05:00')
       end
 
-      it 'create new forced_rate' do
+      it 'creates new forced_rate' do
         expect { post_request }.to change(ForcedRate, :count).by(1)
       end
 
@@ -66,7 +66,7 @@ describe Api::V1::ForcedRatesController, type: :request do
              params: { forced_rate: { rate: -70, show_until: '2030-03-15T17:00:00.000+05:00' } }.to_json, headers: headers
       end
 
-      it 'create new forced_rate' do
+      it 'does not create new forced_rate' do
         expect { post_request }.not_to change(ForcedRate, :count)
       end
 
