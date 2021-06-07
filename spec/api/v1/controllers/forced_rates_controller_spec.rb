@@ -50,6 +50,10 @@ describe Api::V1::ForcedRatesController, type: :request do
         expect(json_data['data']['show_until']).to eq('2030-03-15T17:00:00.000+05:00')
       end
 
+      it 'create new forced_rate' do
+        expect { post_request }.to change(ForcedRate, :count).by(1)
+      end
+
       it 'matches with rate' do
         expect { ActionCable.server.broadcast('rate', forced_rate.rate) }
           .to have_broadcasted_to('rate').with('88.888')
@@ -60,6 +64,10 @@ describe Api::V1::ForcedRatesController, type: :request do
       let(:post_request) do
         post api_v1_forced_rates_path,
              params: { forced_rate: { rate: -70, show_until: '2030-03-15T17:00:00.000+05:00' } }.to_json, headers: headers
+      end
+
+      it 'create new forced_rate' do
+        expect { post_request }.not_to change(ForcedRate, :count)
       end
 
       it 'return status 422 and errors' do
